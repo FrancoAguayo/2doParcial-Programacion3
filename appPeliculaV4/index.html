@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <script src="./js/app.js" defer></script>
+</head>
+
+<body>
+  <main id="app">
+    <!-- Barra de búsqueda -->
+    <div class="Barra">
+      <input type="text" v-model="inputBusqueda" placeholder="Buscar...">
+      <button v-on:click="buscar">Buscar</button>
+    </div>
+    <hr>
+
+    <!-- Resultados de la búsqueda -->
+    <div v-if="resultadosBusqueda.length > 0" class="resultados" alt="Ingrese el nombre de la pelicula">
+      <div v-for="(pelicula, index) in resultadosBusqueda" class="col-md-2 card p-4 m-1">
+        <img v-bind:src="'https://image.tmdb.org/t/p/w500/' + pelicula.poster_path" alt="Movie Poster"
+          v-bind:alt="pelicula.id" class="img-fluid">
+        <button v-on:click="getDetalle(pelicula.id)">Detalle</button>
+        <h5>{{ pelicula.title }}</h5>
+
+      </div>
+    </div>
+
+    <!-- Resultados Fetch Api -->
+    <!-- <div class="row">
+      <div v-for="(pelicula, index) in peliculas" class="col-md-2 card p-4 m-1">
+        <img v-bind:src="'https://image.tmdb.org/t/p/w500/' + pelicula.poster_path" alt="Movie Poster"
+          v-bind:alt="pelicula.id" class="img-fluid">
+        <button v-on:click="getDetalle(pelicula.id)">detalle</button>
+        <p>{{ movie.title}}</p>
+      </div>
+
+    </div> -->
+
+    <!-- Contenedor de resultados por defecto -->
+    <div v-else class="row">
+      <div v-for="(pelicula, index) in peliculas" class="col-md-2 card p-4 m-1">
+        <div v-on:click="getDetalle(pelicula.id)">
+          <img v-bind:src="'https://image.tmdb.org/t/p/w500/' + pelicula.poster_path" alt="Movie Poster"
+            v-bind:alt="pelicula.id" class="img-fluid">
+        </div>
+        <button v-on:click="getDetalle(pelicula.id)"><h5><strong>{{ pelicula.title }}</strong></h5></button>
+        <h5>{{ movie.title}}</h5>
+      </div>
+    </div>
+
+    
+
+
+  </main>
+</body>
+
+</html>
